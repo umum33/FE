@@ -1,5 +1,7 @@
 import "./Product.css";
 import React, { useState, useRef, useEffect } from "react";
+import Header from "../Header/Header";
+import Homeback from "../Homeback/Homeback";
 
 /** ▼ (모의) API: 실제 API가 있으면 fetch로 교체하세요 */
 async function generateProductCopy(keywords) {
@@ -21,6 +23,8 @@ async function generateProductCopy(keywords) {
 function ResultCard({
   initialTitle = "Fresh Apple",
   initialDescription = `These apples were harvested this morning and are exceptionally sweet and crisp. Perfect for snacking or adding to your favorite recipes. Each batch is carefully handpicked to ensure the best quality.`,
+  onClose,           // ← 부모에서 닫기 핸들러 주입
+  ...props           // ← onClick(e.stopPropagation) 전달용
 }) {
   const [title, setTitle] = useState(initialTitle);
   const [description, setDescription] = useState(initialDescription);
@@ -42,9 +46,9 @@ function ResultCard({
   };
 
   return (
-    <section className="rv-card">
-      {/* 우측 상단 액션 */}
-      <div className="rv-actions">
+    <section className="rv-card" {...props}>
+      {/* 상단 좌측 액션 (Copy ←, 그 오른쪽에 닫기) */}
+      <div className="rv-actions rv-actions--left">
         <button
           type="button"
           className="rv-btn rv-btn-ghost"
@@ -53,12 +57,21 @@ function ResultCard({
         >
           📋 Copy
         </button>
+        <button
+          type="button"
+          className="rv-btn rv-btn-ghost"
+          onClick={onClose}
+          title="닫기"
+          aria-label="닫기"
+        >
+          ✕ 닫기
+        </button>
       </div>
 
       <header className="rv-header">
         <h1 className="rv-title">Generated Product Description</h1>
         <p className="rv-sub">
-          Review and edit your title and description. Use the top-right button to copy.
+          Review and edit your title and description. Use the top buttons to copy or close.
         </p>
       </header>
 
@@ -133,9 +146,10 @@ export default function Product() {
       setLoading(true);
       const { title, description } = await generateProductCopy(keywords);
       setResultData({ title, description });
-      showToast("success", "생성이 완료됐어요!");
+      // ✅ 성공 토스트 제거 (생성 완료 팝업 안 띄움)
       setIsResultOpen(true);
     } catch (err) {
+      // 실패만 토스트 표시
       showToast("error", err?.message || "문제가 발생했어요. 잠시 후 다시 시도해 주세요.");
     } finally {
       setLoading(false);
@@ -143,22 +157,10 @@ export default function Product() {
   };
 
   return (
-    <div className="app" aria-busy={loading}>
-      {/* Header (필요 시 네가 쓰던 마크업 유지) */}
-      <header className="header">
-        <div className="container header__inner">
-          <div className="brand">
-            <div className="logo-icon" aria-hidden="true">
-              {/* 로고 SVG 예시 */}
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor" />
-                <path fillRule="evenodd" clipRule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" />
-              </svg>
-            </div>
-            <h1 className="brand__title">Orumi</h1>
-          </div>
-        </div>
-      </header>
+    <div className="app" aria-busy={loading}  style={{ fontFamily: '"Work Sans", "Noto Sans", sans-serif' }}>
+      {/* Header */}
+       <Header />
+       <Homeback />
 
       <main>
         {/* Hero */}
@@ -183,7 +185,8 @@ export default function Product() {
                       strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2"
                       strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>                  <label className="ibox-label" htmlFor="keywordInput">키워드 입력</label>
+                  </svg>
+                  <label className="ibox-label" htmlFor="keywordInput">키워드 입력</label>
                 </div>
                 <textarea
                   id="keywordInput"
@@ -215,7 +218,6 @@ export default function Product() {
                     strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-
 
               <p className="ibox-sub">말하면 텍스트로 변환해 글을 만들어 드립니다.</p>
             </div>
@@ -257,7 +259,7 @@ export default function Product() {
         </div>
       )}
 
-      {/* 토스트 */}
+      {/* 토스트 (오류만 표시) */}
       {toast.open && (
         <div className={`toast ${toast.type === "error" ? "toast--error" : "toast--success"}`}>
           <span className="toast__icon" aria-hidden>⏳</span>
@@ -273,7 +275,7 @@ export default function Product() {
         </div>
       )}
 
-      {/* ✅ 결과 모달 (X로 닫기 / 백드롭 클릭 / ESC로 닫기) */}
+      {/* ✅ 결과 모달: 백드롭 + 카드만 (가장 큰 박스 제거) */}
       {isResultOpen && (
         <div
           className="modal-backdrop"
@@ -281,27 +283,12 @@ export default function Product() {
           aria-modal="true"
           onClick={() => setIsResultOpen(false)}
         >
-          <div
-            className="modal-panel result-modal-panel"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="modal-close"
-              aria-label="닫기"
-              title="닫기"
-              onClick={() => setIsResultOpen(false)}
-            >
-              ×
-            </button>
-
-            <div className="modal-body">
-              <ResultCard
-                initialTitle={resultData.title}
-                initialDescription={resultData.description}
-              />
-            </div>
-          </div>
+          <ResultCard
+            onClick={(e) => e.stopPropagation()}      // 카드 내부 클릭은 닫힘 방지
+            onClose={() => setIsResultOpen(false)}     // 닫기 버튼
+            initialTitle={resultData.title}
+            initialDescription={resultData.description}
+          />
         </div>
       )}
     </div>

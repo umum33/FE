@@ -10,6 +10,7 @@
   padding: 3rem 0;
 }
 
+/* 👇 input-section을 flex column으로 설정 */
 .input-section {
   display: flex;
   flex-direction: column;
@@ -43,13 +44,22 @@
   color: #111418;
 }
 
+/* 👇 새로운 컨트롤 그룹 스타일 */
+.controls-group {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
 .select-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  flex: none;
+  align-items: flex-start;
   justify-content: center;
-  /*gap: 0.1rem;*/
-  padding: 20px;
-  /*flex-direction: column;*/
+  gap: 0.5rem;
 }
 
 .select {
@@ -63,32 +73,40 @@
   line-height: normal;
 }
 
-.btn-generate {
+.btn-generate, .btn-copy {
   min-width: 84px;
   height: 3.5rem;
   padding: 0 1rem;
   border-radius: 0.5rem;
-  background-color: #c46f2d;
-  color: white;
   font-size: 0.875rem;
   font-weight: bold;
   cursor: pointer;
 }
 
-.page-title {
-  color: #111418; /* 현재 색상 */
-  letter-spacing: -0.025em;
-  font-size: 32px; /* 현재 크기 */
-  font-weight: 900; /* 현재 굵기 */
-  line-height: 1.2;
+.btn-generate {
+  background-color: #c46f2d;
+  color: white;
 }
 
+.btn-copy {
+  background-color: #f0f2f5;
+  color: #111418;
+  border: 1px solid #dbe0e6;
+}
+
+.page-title {
+  color: #111418;
+  letter-spacing: -0.025em;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.2;
+}
 
 .how-to-title {
   font-size: 2rem;
   font-weight: 800;
   text-align: center;
-  color: #923522; /* 제목 색상 */
+  color: #923522;
   margin-bottom: 2rem;
 }
 
@@ -114,7 +132,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f7e6d4; /* 아이콘 배경색 */
+  background-color: #f7e6d4;
   border-radius: 50%;
   margin-bottom: 1rem;
 }
@@ -122,7 +140,7 @@
 .how-to-icon svg {
   width: 32px;
   height: 32px;
-  color: #923522; /* 아이콘 색상 */
+  color: #923522;
 }
 
 .how-to-step-title {
