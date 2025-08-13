@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import { MainActions } from "../src/Mainpage/MainActions";
+import { Main } from "../src/Mainpage/Main";
+import  ReviewPage  from "../src/Reviewpage/ReviewPage";
+import  Mypage from "../src/Mypage/Mypage";
+import Product from "../src/Product/Product";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Main />}/>
+      <Route path="/result" element={<Product />} />
+      <Route path="/review" element={<ReviewPage />} />
+      <Route path="/mypage" element={<Mypage />}/>
+
+    </Routes>
   );
 }
-
-export default App;

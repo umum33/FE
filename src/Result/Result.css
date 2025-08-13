@@ -1,0 +1,191 @@
+/* ===== Tokens ===== */
+:root {
+  --ink: #2d1b0d; /* 진한 갈색톤 글자 */
+  --muted: #a66b4c; /* 부드러운 갈색-주황 */
+  --border: #f2d4c2; /* 연한 테두리색 */
+  --divider: #f7e3d7;
+  --bg: #ffffff; /* 전체 배경 */
+  --panel: #ffffff;
+
+  --primary: #f77f00; /* 메인 주황 */
+  --primary-hover: #e96f00; /* hover 시 더 진한 주황 */
+
+  --ghost: #fff1e6; /* 버튼 연한 주황 */
+  --ghost-hover: #ffe6d4; /* 버튼 hover 시 조금 진한 주황 */
+
+  --radius: 14px;
+  --shadow: 0 12px 28px rgba(247, 127, 0, 0.08);
+
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --header-h: 64px;
+}
+
+/* 레이아웃 기본값 */
+html, body {
+  height: 100%;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
+  font-family: Inter, "Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== 공용 컨테이너 ===== */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== Header (상단 고정) ===== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: saturate(130%) blur(10px);
+}
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+}
+.logo-icon { width: 22px; height: 22px; color: currentColor; }
+.brand__title { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+
+/* ===== Page ===== */
+.rv-page {
+  min-height: calc(100vh - var(--header-h));
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 28px 24px 40px;
+}
+
+/* ===== Card ===== */
+.rv-card {
+  position: relative;
+  width: min(760px, 94vw);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* 상단 액션 버튼 */
+.rv-actions {
+  position: absolute;
+  right: var(--space-3);
+  top: var(--space-3);
+  display: inline-flex;
+  gap: var(--space-2);
+}
+
+/* ===== Header in Card ===== */
+.rv-header {
+  padding: calc(var(--space-5) + 2px) var(--space-5) var(--space-3);
+}
+.rv-title {
+  margin: 0 0 6px 0;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.rv-sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+/* 구분선 */
+.rv-divider {
+  height: 1px;
+  width: 100%;
+  background: var(--divider);
+}
+
+/* ===== Fields ===== */
+.rv-fields {
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  display: grid;
+  gap: var(--space-4);
+}
+.rv-field { display: grid; gap: var(--space-2); }
+.rv-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #5b3319;
+}
+
+/* 텍스트 영역 */
+.rv-textarea {
+  width: 100%;
+  padding: 14px 14px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: #fff5ed;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  resize: vertical;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease, transform .05s ease;
+}
+.rv-textarea--compact { resize: none; }
+.rv-textarea::placeholder { color: var(--muted); }
+.rv-textarea:focus {
+  background: #fff;
+  border-color: #f5a76f;
+  box-shadow: 0 0 0 3px rgba(247, 127, 0, 0.25);
+}
+
+/* 버튼 */
+.rv-btn {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 0;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color .15s ease, box-shadow .15s ease, transform .05s ease;
+}
+.rv-btn:active { transform: translateY(0.5px); }
+
+.rv-btn-ghost {
+  background: var(--ghost);
+  color: var(--ink);
+  border: 1px solid transparent;
+}
+.rv-btn-ghost:hover {
+  background: var(--ghost-hover);
+}
+
+.rv-btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.rv-btn-primary:hover { background: var(--primary-hover); }
+
+/* 반응형 */
+@media (max-width: 520px) {
+  .rv-title { font-size: 20px; }
+  .rv-page { padding: 20px 16px 28px; }
+  .rv-header { padding: 24px 18px 12px; }
+  .rv-fields { padding: 16px 18px 20px; }
+}
