@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { FileText, MessageSquare, User, ChevronRight } from "lucide-react";
-
+import { FileText, MessageSquare, User, ChevronRight,FileQuestionMark  } from 'lucide-react';
 export function MainActions() {
 
   const navigate = useNavigate();
 
   const actions = [
+
     {
       icon: FileText,
       title: "상품 홍보글 만들기",
@@ -35,6 +35,17 @@ export function MainActions() {
       iconBg: "from-amber-100 to-yellow-100",
       path : "/mypage"
     }
+    ,
+    {
+      icon: FileQuestionMark,
+      title: "상품 등록 안내",
+      description: "온라인 스토어에 우리 상품을\n등록하는 방법을 알려드려요 ",
+      buttonText: "안내글 보러가기",
+      gradient: "from-orange-600 to-red-600",
+      iconBg: "from-orange-100 to-red-100",
+      path:"/guidline"
+    }
+
   ];
 
   return (
@@ -49,7 +60,7 @@ export function MainActions() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {actions.map((action, index) => (
             <Card key={index} className="group text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-orange-100 bg-white">
               <CardHeader className="pb-4 pt-6">

@@ -88,7 +88,6 @@ export default function ReviewPage() {
                     <span className="truncate">생성버튼</span>
                   </button>
                 </div>
-                {/* 👆 수정된 부분 */}
               </div>
 
               {/* AI-Generated Response */}
@@ -114,7 +113,6 @@ export default function ReviewPage() {
           </div>
         </div>
 
-        {/* '이렇게 사용해 보세요!' 섹션 */}
         <div className="flex justify-center p-5 how-to-section">
           <div className="max-w-[960px] flex-1">
             <h2 className="how-to-title">
