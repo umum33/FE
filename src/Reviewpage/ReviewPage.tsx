@@ -1,31 +1,42 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import "./ReviewPage.css";
 import Homeback from "../Homeback/Homeback";
 import Header from "../Header/Header";
 
+const PasteIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+  </svg>
+);
+
+const ToneIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20z"></path>
+    <path d="M12 6v6l4 2"></path>
+  </svg>
+);
+
+const CopyIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+  </svg>
+);
+
+const toneMapping = {
+  "친절한 어조": "POLITE",
+  "전문적인 어조": "NEUTRAL",
+  "유쾌한 어조": "FUNNY",
+};
+
+
 export default function ReviewPage() {
+  const [reviewText, setReviewText] = useState("");
   const [generatedResponse, setGeneratedResponse] = useState("");
-
-  const PasteIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-    </svg>
-  );
-
-  const ToneIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20z"></path>
-      <path d="M12 6v6l4 2"></path>
-    </svg>
-  );
-
-  const CopyIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-    </svg>
-  );
+  const [selectedTone, setSelectedTone] = useState("친절한 어조");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCopy = () => {
     if (generatedResponse) {
@@ -42,8 +53,32 @@ export default function ReviewPage() {
     }
   };
 
-  const handleGenerate = () => {
-    setGeneratedResponse("AI가 생성한 응답입니다. 고객님, 소중한 시간을 내어 좋은 후기를 남겨주셔서 진심으로 감사드립니다.");
+  const handleGenerate = async () => {
+    try {
+      const apiEndpoint = '/api/v1/reviews/generate'; 
+
+      const reviewStyle = toneMapping[selectedTone as keyof typeof toneMapping];
+
+      const requestBody = {
+        reviewText: reviewText,
+        reviewStyle: reviewStyle
+      };
+
+      const response = await axios.post(apiEndpoint, requestBody);
+
+      if (response.data.success) {
+        setGeneratedResponse(response.data.data.generatedReply);
+      } else {
+        console.error("API 응답 오류:", response.data.error);
+        alert("응답 생성에 실패했습니다. " + response.data.error);
+      }
+    } catch (error) {
+      console.error("API 통신 중 오류가 발생했습니다:", error);
+      alert("서버 연결에 실패했습니다. CORS 설정 또는 URL을 확인해주세요.");
+    }finally {
+      // 요청이 성공하거나 실패하든, 로딩이 끝나면 isLoading을 false로 설정
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -54,7 +89,6 @@ export default function ReviewPage() {
         <Header />
         <Homeback />
 
-        {/* Main Content */}
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div className="flex flex-wrap justify-between gap-3 p-4">
@@ -64,28 +98,31 @@ export default function ReviewPage() {
               </div>
             </div>
 
-            {/* 가로형 컨테이너 */}
             <div className="horizontal-container">
-              {/* Original Review */}
               <div className="input-section">
                 <label className="form-label">
                   <p className="label-text">고객 리뷰</p>
-                  <textarea className="textarea"></textarea>
+                  <textarea 
+                  className="textarea"
+                  value={reviewText}
+                  onChange = {(e) => setReviewText(e.target.value)}>
+                  </textarea>
                 </label>
-                {/* 👇 어조 선택 & 생성 버튼을 이 컨테이너 안으로 이동 */}
                 <div className="controls-group">
                   <div className="select-container">
                     <label className="form-label">
                       <p className="label-text">응답 어조 선택</p>
-                      <select className="select">
-                        <option value="one">친절한 어조</option>
-                        <option value="two">전문적인 어조</option>
-                        <option value="three">유쾌한 어조</option>
+                      <select className="select"
+                      value={selectedTone}
+                      onChange={(e)=> setSelectedTone(e.target.value)}>
+                        <option value="친절한 어조">친절한 어조</option>
+                        <option value="전문적인 어조">전문적인 어조</option>
+                        <option value="유쾌한 어조">유쾌한 어조</option>
                       </select>
                     </label>
                   </div>
-                  <button className="btn-generate" onClick={handleGenerate}>
-                    <span className="truncate">생성버튼</span>
+                  <button className="btn-generate" onClick={handleGenerate} disabled={isLoading}>
+                    <span className="truncate">{isLoading ? "로딩 중..." : "생성버튼"}</span>
                   </button>
                 </div>
               </div>
@@ -100,13 +137,11 @@ export default function ReviewPage() {
                     readOnly
                   ></textarea>
                 </label>
-                {/* 👇 복사하기 버튼을 이 컨테이너 안으로 이동 */}
                 <div className="controls-group">
                   <button className="btn-copy" onClick={handleCopy}>
                     <span className="truncate">복사하기</span>
                   </button>
                 </div>
-                {/* 👆 수정된 부분 */}
               </div>
             </div>
 
