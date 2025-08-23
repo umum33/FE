@@ -46,33 +46,33 @@ export default function Mypage() {
   const [reviewHistory, setReviewHistory] = React.useState([]);
   const [productHistory, setProductHistory] = React.useState([]);
 
- 
-  
+
+
   // 로딩 및 에러 상태를 위한 state
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
 
   // 페이지 처음 열릴 때 서버에 데이터 요청
-    React.useEffect(() => {
-      const fetchHistory = async () => {
-        try {
-          const response = await fetch('/api/history');
-          if (!response.ok) {
-            throw new Error('데이터를 불러오는 데 실패했습니다.');
-          }
-          const data = await response.json();
-          setReviewHistory(data.reviewHistory);
-          setProductHistory(data.productHistory);
-        } catch (err) {
-          setError(err.message);
-        } finally {
-          setLoading(false);
+  React.useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const response = await fetch('/api/history');
+        if (!response.ok) {
+          throw new Error('데이터를 불러오는 데 실패했습니다.');
         }
-      };
-  
-      fetchHistory();
-    }, []);
-  
+        const data = await response.json();
+        setReviewHistory(data.reviewHistory);
+        setProductHistory(data.productHistory);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHistory();
+  }, []);
+
 
 
 
@@ -92,10 +92,10 @@ export default function Mypage() {
   };
 
   return (
-    <div className="page-root"   style={{ fontFamily: '"Work Sans", "Noto Sans", sans-serif' }}>
+    <div className="page-root" style={{ fontFamily: '"Work Sans", "Noto Sans", sans-serif' }}>
       {/* Header */}
-     <Header />
-     <Homeback />
+      <Header />
+      <Homeback />
       {/* 스크롤 영역 */}
       <div className="content-scroll">
         <div className="container">
@@ -115,9 +115,9 @@ export default function Mypage() {
             <div className="card-scroll">
               <table className="table-fixed">
                 <colgroup>
-                  <col />{/* Review */}
-                  <col />{/* Reply */}
-                  <col style={{ width: "140px" }} />{/* Date */}
+                  <col style={{ width: "35%" }}/>{/* Review */}
+                  <col style={{ width: "45%" }}/>{/* Reply */}
+                  <col style={{ width: "12%" }} />{/* Date */}
                 </colgroup>
                 <thead>
                   <tr>
@@ -133,10 +133,9 @@ export default function Mypage() {
                     const CellBtn = ({ text, label }) => (
                       <button
                         type="button"
-                        className="ellipsis-3 ellipsis-trigger cell-trigger"
+                        className="ellipsis-trigger cell-trigger"
                         onClick={() => setSelectedRow(item)} // 전체 item 객체를 state에 저장
-                        aria-label={`${label}: 모달로 전체 보기`}
-                        title="Click to view full review & reply"
+                        title="눌러서 전체 내용 확인"
                       >
                         {text}
                       </button>
@@ -155,7 +154,7 @@ export default function Mypage() {
                             type="button"
                             className="date-trigger"
                             onClick={() => setSelectedRow(item)}
-                            title="View full review & reply"
+                            title="눌러서 전체 내용 확인"
                           >
                             {date}
                           </button>
@@ -178,37 +177,44 @@ export default function Mypage() {
             <div className="card-scroll">
               <table className="table-fixed">
                 <colgroup>
-                  <col />{/* Title */}
-                  <col style={{ width: "140px" }} />
+                  <col style={{ width: "35%" }}/>{/* Title */}
+                  <col style={{ width: "45%" }}/>{/* content */}
+                  <col style={{ width: "12%" }} />
                 </colgroup>
                 <thead>
                   <tr>
                     <th>상품글 제목</th>
+                    <th>본문</th>
                     <th className="th-right">생성 날짜</th>
                   </tr>
                 </thead>
                 <tbody>
                   {productHistory.map((item, i) => {
-                    const { generatedTitle, createdAt } = item;
+                    // ✅ 셀 공통 렌더러 (리뷰 섹션과 동일한 구조)
+                    const CellBtn = ({ text, label }) => (
+                      <button
+                        type="button"
+                        className="ellipsis-trigger cell-trigger"
+                        onClick={() => setSelectedPost(item)}
+                        title="눌러서 전체 내용 확인"
+                      >
+                        {text}
+                      </button>
+                    );
+
+                    const { generatedTitle, generatedDescription, createdAt } = item;
                     const date = new Date(createdAt).toLocaleDateString();
                     return (
-                      <tr key={i}>
-                        <td>
-                          <button
-                            type="button"
-                            className="ellipsis-3 ellipsis-trigger cell-trigger"
-                            onClick={() => setSelectedPost(item)} // 전체 item 객체를 state에 저장
-                            aria-label="Product title: view full"
-                          >
-                            {generatedTitle}
-                          </button>
-                        </td>
+                      <tr key={item.historyId || i}> {/* key는 고유 ID를 사용하는 것이 더 좋습니다 */}
+                        {/* CellBtn을 사용하여 제목과 본문 표시 */}
+                        <td><CellBtn text={generatedTitle} label="Title" /></td>
+                        <td><CellBtn text={generatedDescription} label="Description" /></td>
                         <td className="td-right">
                           <button
                             type="button"
                             className="date-trigger"
                             onClick={() => setSelectedPost(item)}
-                            aria-label="Product date: view"
+                            title="눌러서 전체 내용 확인"
                           >
                             {date}
                           </button>
@@ -231,7 +237,7 @@ export default function Mypage() {
             title="📜 리뷰 및 답글 상세"
             actions={
               <button className="modal-copy-button" onClick={() => handleCopy(selectedRow?.generatedReply)}>
-                 Copy
+                전체 복사
               </button>
             }
           >
@@ -248,7 +254,7 @@ export default function Mypage() {
                 <div className="post-meta">
                   작성일: <strong>{new Date(selectedRow.createdAt).toLocaleDateString()}</strong>
                 </div>
-                
+
               </div>
             )}
           </Modal>
@@ -257,10 +263,11 @@ export default function Mypage() {
           <Modal
             open={!!selectedPost}
             onClose={() => setSelectedPost(null)}
-            title="상품글 상세"
+            title="📜 상품글 상세"
             actions={
-              <button className="modal-copy-button" onClick={() => handleCopy(selectedPost?.generatedTitle)}>
-                Copy
+              // 제목과 본문을 함께 복사하도록 수정
+              <button className="modal-copy-button" onClick={() => handleCopy(`${selectedPost?.generatedTitle}\n\n${selectedPost?.generatedDescription}`)}>
+                전체 복사
               </button>
             }
           >
@@ -270,6 +277,12 @@ export default function Mypage() {
                   <h4 className="post-label">상품글 제목</h4>
                   <div className="post-text">{selectedPost.generatedTitle}</div>
                 </div>
+                {/* ▼▼▼ 본문 섹션 추가 ▼▼▼ */}
+                <div className="modal-content-section">
+                  <h4 className="post-label">본문</h4>
+                  <div className="post-text">{selectedPost.generatedDescription}</div>
+                </div>
+                {/* ▲▲▲ 본문 섹션 추가 ▲▲▲ */}
                 <div className="post-meta">
                   작성일: <strong>{new Date(selectedPost.createdAt).toLocaleDateString()}</strong>
                 </div>
@@ -278,9 +291,9 @@ export default function Mypage() {
           </Modal>
 
         </div>
-          <footer className="footer">
-            <p>© {new Date().getFullYear()} Orumi. All rights reserved.</p>
-          </footer>
+        <footer className="footer">
+          <p>© {new Date().getFullYear()} Orumi. All rights reserved.</p>
+        </footer>
       </div>
     </div>
   );

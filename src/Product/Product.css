@@ -52,8 +52,7 @@ body { margin: 0;  }
 /* Hero */
 .hero { padding-top: 16px; padding-bottom: 20px; }
 .hero__text {
-  margin-top: 120px;
-  margin-bottom: 70px;
+  margin-top: 80px;
   display: flex; flex-direction: column;
   justify-content: center; align-items: center; text-align: center; height: 100%;
 }
@@ -91,7 +90,7 @@ body { margin: 0;  }
 
 
 /* Icon box text/form */
-.ibox-sub { margin: 18px 0 0 0; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.95); max-width: 80%; }
+.ibox-sub { margin: 20px 0 0 0; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.95); max-width: 80%; text-align: center; }
 .ibox-form { width: 100%; max-width: 340px; display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
 .ibox-header { display: flex; align-items: center; gap: 10px; }
 .ibox-label { color: rgba(255,255,255,0.95); font-size: 15px; font-weight: 700; }
@@ -155,7 +154,7 @@ body { margin: 0;  }
 .cta .container { display: flex; justify-content: center; align-items: center; flex-direction: column; }
 
 .cta-button{
-  width: 100px; height: 100px; border: none; cursor: pointer; padding: 0;
+  width: 100px; border: none; cursor: pointer; padding: 0;
   display: flex; align-items: center; justify-content: center;
   transition: transform 0.3s ease; overflow: visible; margin-top: 0;
 }
@@ -183,10 +182,11 @@ body { margin: 0;  }
 /* ===== Toast ===== */
 .toast {
   position: fixed; right: 16px; top: 16px; width: fit-content;
+  transform: translateX(-50%);   left: 50%;   
   display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center;
   padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border);
   box-shadow: 0 10px 22px rgba(0,0,0,0.08); background: #fff; z-index: 1000;
-  animation: toast-in .18s ease-out forwards;
+  animation: 7s toast-out forwards;
 }
 @keyframes toast-in { from {opacity:0; transform: translateY(-8px);} to {opacity:1; transform: translateY(0);} }
 .toast--success { border-color: #ffd4ad; background: #fff7f0; }

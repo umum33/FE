@@ -103,7 +103,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ✅ 날짜는 한 줄 유지 & 우측 정렬 (잘림 방지) */
 .th-right, .td-right {
-  text-align: center;
+  text-align: left;
   white-space: nowrap;           /* 줄바꿈 금지 */
 }
 
@@ -112,11 +112,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ================== 긴 글 처리 & 모달 ================== */
 /* 3줄 말줄임 */
-.ellipsis-3{
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
+
 /* 클릭 타겟(버튼처럼) */
 .ellipsis-trigger{
   display: block;
@@ -127,6 +123,11 @@ a { color: inherit; text-decoration: none; }
   padding: 0;
   color: inherit;
   cursor: pointer;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+
 }
 
 /* 모달 */

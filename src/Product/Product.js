@@ -160,7 +160,7 @@ export default function Product() {
       const keywordsTrimForPayload = (keywords || "").trim();
 
       let finalInput = "";
-      
+
 
       // 1순위: 음성 녹음 결과(sttText)가 있으면 그것을 사용
       if (sttFinalForPayload) {
@@ -172,37 +172,37 @@ export default function Product() {
       }
 
       const payload = {
-      productInfo: finalInput, // 키를 'productInfo'로 통일
-    };
-    lastPayloadRef.current = payload; // 필요시 마지막 요청 보관
+        productInfo: finalInput, // 키를 'productInfo'로 통일
+      };
+      lastPayloadRef.current = payload; // 필요시 마지막 요청 보관
 
-    // console.log("전송 직전 payload:", payload);
-    
-    const response = await fetch('/api/v1/products/generate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+      // console.log("전송 직전 payload:", payload);
 
-    if (!response.ok) {
-      // 서버에서 2xx 상태 코드가 아닌 응답을 보냈을 때 에러 처리
-      throw new Error("상품글 생성에 실패했어요. 다시 시도해 주세요.");
-    }
+      const response = await fetch('/api/v1/products/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
 
-    const responseData = await response.json(); //서버가 보낸 내용 확인
-    
-    //데이터 추출
-    if (responseData.success && responseData.data) {
-      const { generatedTitle, generatedDescription } = responseData.data;
-      setResultData({ title: generatedTitle, description: generatedDescription });
-      setIsResultOpen(true);
-    } else {
-      // 성공했지만 데이터가 없는 경우 등 예외 처리
-      throw new Error(responseData.error || "알 수 없는 오류가 발생했어요.");
-    }
-      
+      if (!response.ok) {
+        // 서버에서 2xx 상태 코드가 아닌 응답을 보냈을 때 에러 처리
+        throw new Error("상품글 생성에 실패했어요. 다시 시도해 주세요.");
+      }
+
+      const responseData = await response.json(); //서버가 보낸 내용 확인
+
+      //데이터 추출
+      if (responseData.success && responseData.data) {
+        const { generatedTitle, generatedDescription } = responseData.data;
+        setResultData({ title: generatedTitle, description: generatedDescription });
+        setIsResultOpen(true);
+      } else {
+        // 성공했지만 데이터가 없는 경우 등 예외 처리
+        throw new Error(responseData.error || "알 수 없는 오류가 발생했어요.");
+      }
+
     } catch (err) {
       showToast("error", err?.message || "문제가 발생했어요. 잠시 후 다시 시도해 주세요.");
     } finally {
@@ -248,7 +248,7 @@ export default function Product() {
           const blob = new Blob(audioChunksRef.current, { type: blobType });
           const url = URL.createObjectURL(blob);
           setAudioURL(url);
-          showToast("success", "녹음이 완료되었습니다."); // 토스트로 안내
+          showToast("success", "  녹음이 완료되었습니다. 버튼을 눌러 새로 녹음할 수 있습니다."); // 토스트로 안내
         } finally {
           if (streamRef.current) {
             streamRef.current.getTracks().forEach(t => t.stop());
@@ -326,7 +326,7 @@ export default function Product() {
   }, [recording]);
 
   return ( // 실제 UI 렌더링
-    <div className="app" aria-busy={loading}  style={{ fontFamily: '"Work Sans", "Noto Sans", sans-serif' }}>
+    <div className="app" aria-busy={loading} style={{ fontFamily: '"Work Sans", "Noto Sans", sans-serif' }}>
       {/* Header */}
       <Header />
       <Homeback />
@@ -337,7 +337,7 @@ export default function Product() {
         <section className="container hero" aria-label="등록 방식 선택">
           <div className="hero__text">
             <h2 className="hero__title">어떤 방법으로 상품 글을 생성하시겠습니까?</h2>
-            <p className="hero__sub">키워드로 간단히 쓰거나, 말하면 글로 바꿔드립니다.</p>
+            <p className="hero__sub">키워드를 입력하거나 녹음을 한 후, 결과 보기 버튼을 누르면 상품 글이 생성됩니다.</p>
           </div>
         </section>
 
@@ -361,7 +361,7 @@ export default function Product() {
                 <textarea
                   id="keywordInput"
                   className="ibox-input"
-                  placeholder="예: 운동화, 편안함, 가벼움"
+                  placeholder="예: 청도 감, 당도 높음, 오늘 수확"
                   rows={7}
                   value={keywords}
                   onChange={(e) => setKeywords(e.target.value)}
@@ -409,9 +409,9 @@ export default function Product() {
                   alignItems: "center",
                   justifyContent: "center"
                 }}>
-                  {(!audioURL || recording || recInit) ? (
+                  {(!audioURL ) ? (
                     <p className="ibox-sub">
-                      말하면 텍스트로 변환해 글을 만들어 드립니다.
+                      음성으로 말하면 자동으로 글을 만들어 드립니다. <br></br>버튼을 누르면 녹음이 시작/중지 됩니다.
                     </p>
                   ) : null}
                 </div>
@@ -446,11 +446,6 @@ export default function Product() {
       {/* Footer */}
       <footer className="footer">
         <div className="container footer__inner">
-          <nav className="footer__nav">
-            <a className="link" href="/terms">Terms of Service</a>
-            <a className="link" href="/privacy">Privacy Policy</a>
-            <a className="link" href="/contact">Contact Us</a>
-          </nav>
           <p className="footer__copy">© 2023 Orumi. All rights reserved.</p>
         </div>
       </footer>
