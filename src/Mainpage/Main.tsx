@@ -102,7 +102,7 @@ export function Main (){
                     <a className="text-[#8a7260] text-base font-normal leading-normal min-w-40" href="#">Privacy Policy</a>
                     <a className="text-[#8a7260] text-base font-normal leading-normal min-w-40" href="#">Contact Us</a>
                   </div>
-                  <p className="text-[#8a7260] text-base font-normal leading-normal">© 2023 Orumi. All rights reserved.</p>
+                  <p className="text-[#8a7260] text-base font-normal leading-normal">© 2025 Orumi. All rights reserved.</p>
                 </div>
               </div>
             </footer>
