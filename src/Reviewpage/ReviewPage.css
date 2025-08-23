@@ -1,0 +1,156 @@
+.horizontal-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.how-to-section {
+  background-color: #fff9f0; 
+  padding: 3rem 0;
+}
+
+/* 👇 input-section을 flex column으로 설정 */
+.input-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.label-text {
+  color: #111418;
+  font-size: 1rem;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+}
+
+.textarea {
+  flex: 1;
+  resize: none;
+  border-radius: 0.5rem;
+  border: 1px solid #dbe0e6;
+  background-color: white;
+  min-height: 9rem;
+  padding: 15px;
+  font-size: 1rem;
+  line-height: normal;
+  color: #111418;
+}
+
+/* 👇 새로운 컨트롤 그룹 스타일 */
+.controls-group {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.select-container {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.select {
+  width: 150px;
+  height: 3.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #dbe0e6;
+  background-color: white;
+  padding: 15px;
+  font-size: 1rem;
+  line-height: normal;
+}
+
+.btn-generate, .btn-copy {
+  min-width: 84px;
+  height: 3.5rem;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-generate {
+  background-color: #c46f2d;
+  color: white;
+}
+
+.btn-copy {
+  background-color: #f0f2f5;
+  color: #111418;
+  border: 1px solid #dbe0e6;
+}
+
+.page-title {
+  color: #111418;
+  letter-spacing: -0.025em;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.how-to-title {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  color: #923522;
+  margin-bottom: 2rem;
+}
+
+.how-to-steps-container {
+  display: flex;
+  justify-content: center;
+  gap: 4em;
+  flex-wrap: wrap;
+}
+
+.how-to-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  max-width: 250px;
+}
+
+.how-to-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7e6d4;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.how-to-icon svg {
+  width: 32px;
+  height: 32px;
+  color: #923522;
+}
+
+.how-to-step-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #111418;
+}
+
+.how-to-step-description {
+  font-size: 1rem;
+  color: #8a7260;
+  line-height: 1.5;
+}

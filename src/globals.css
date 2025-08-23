@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-size: 16px;
+  --background: #fefdfb;
+  --foreground: #1f1611;
+  --card: #ffffff;
+  --card-foreground: #1f1611;
+  --popover: #ffffff;
+  --popover-foreground: #1f1611;
+  --primary: #ea580c;
+  --primary-foreground: #ffffff;
+  --secondary: #fed7aa;
+  --secondary-foreground: #7c2d12;
+  --muted: #fef3e2;
+  --muted-foreground: #a16207;
+  --accent: #ffedd5;
+  --accent-foreground: #ea580c;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #fed7aa;
+  --input: transparent;
+  --input-background: #fefdfb;
+  --switch-background: #fed7aa;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #ea580c;
+  --chart-1: #ea580c;
+  --chart-2: #f59e0b;
+  --chart-3: #eab308;
+  --chart-4: #84cc16;
+  --chart-5: #ef4444;
+  --radius: 0.75rem;
+  --sidebar: #fefdfb;
+  --sidebar-foreground: #1f1611;
+  --sidebar-primary: #ea580c;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #fef3e2;
+  --sidebar-accent-foreground: #1f1611;
+  --sidebar-border: #fed7aa;
+  --sidebar-ring: #ea580c;
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
+  --popover: #1e293b;
+  --popover-foreground: #f1f5f9;
+  --primary: #f97316;
+  --primary-foreground: #ffffff;
+  --secondary: #334155;
+  --secondary-foreground: #cbd5e1;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #1e293b;
+  --accent-foreground: #f97316;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #334155;
+  --input: #334155;
+  --ring: #f97316;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: #f97316;
+  --chart-2: #f59e0b;
+  --chart-3: #eab308;
+  --chart-4: #84cc16;
+  --chart-5: #ef4444;
+  --sidebar: #1e293b;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #f97316;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #334155;
+  --sidebar-accent-foreground: #cbd5e1;
+  --sidebar-border: #334155;
+  --sidebar-ring: #f97316;
+}
+
+.page-container {
+  font-family: "Work Sans", "Noto Sans", sans-serif;
+}
+
+/* Tailwind v3에서는 @theme at-rule을 사용하지 않음 */
+
+/* 전역 베이스 스타일: Tailwind 유틸이 아닌 순수 CSS로 정의 */
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: 2.5rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.3;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+    }
+
+    h4 {
+      font-size: 1.25rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+    }
+
+    p {
+      font-size: 1.125rem;
+      font-weight: var(--font-weight-normal);
+      line-height: 1.6;
+    }
+
+    label {
+      font-size: 1.125rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: 1.125rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: 1.125rem;
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
