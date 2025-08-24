@@ -1,16 +1,14 @@
-/* ===== Design Tokens ===== */
-:root{
+:root {
   --ink: #181411;
   --muted: #8a7260;
   --border: #f5f2f0;
   --accent: #f47b25;
-  --primary: var(--accent); /* 스피너/강조 색상 통일 */
+  --primary: var(--accent);
 }
 
-/* ===== Base ===== */
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; }
-body { margin: 0;  }
+body { margin: 0; }
 .app {
   min-height: 100%;
   overflow-x: hidden;
@@ -18,10 +16,8 @@ body { margin: 0;  }
   color: var(--ink);
 }
 
-/* ===== Layout ===== */
 .container { max-width: 960px; margin: 0 auto; padding: 16px; }
 
-/* Header */
 .header {
   position: sticky;
   top: 0;
@@ -30,8 +26,8 @@ body { margin: 0;  }
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--border);
-  background: rgba(255,255,255,0.8);   /* 공통 배경 */
-  backdrop-filter: saturate(130%) blur(10px); /* 선택: 유리 효과 */
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: saturate(130%) blur(10px);
 }
 .header__inner {
   display: flex;
@@ -47,9 +43,6 @@ body { margin: 0;  }
 .logo-icon { width: 22px; height: 22px; color: currentColor; }
 .brand__title { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
 
-
-
-/* Hero */
 .hero { padding-top: 16px; padding-bottom: 20px; }
 .hero__text {
   margin-top: 80px;
@@ -59,18 +52,15 @@ body { margin: 0;  }
 .hero__title { margin: 0 0 6px 0; font-size: 36px; font-weight: 900; letter-spacing: -0.02em; color: var(--ink); }
 .hero__sub { margin: 0; color: var(--muted); line-height: 1.6; font-size: 16px; }
 
-/* Grid */
 .grid { display: grid; gap: 40px; padding: 16px; margin-top: 20px; }
 .grid--2 { grid-template-columns: 1fr; }
 @media (min-width: 768px) { .grid--2 { grid-template-columns: 1fr 1fr; } }
 
-/* Group wrapper for both icon boxes and cards */
 .cards-group.container{
   margin-top: 10px; margin-bottom: 30px;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
 
-/* Icon box */
 .card-icon-box {
   width: 430px; height: 300px;
   background: var(--accent);
@@ -84,12 +74,10 @@ body { margin: 0;  }
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:center;  /* 중앙 유지 */
-  padding-top:0;            /* 필요 없으면 0 */
+  justify-content:center;
+  padding-top:0;
 }
 
-
-/* Icon box text/form */
 .ibox-sub { margin: 20px 0 0 0; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.95); max-width: 80%; text-align: center; }
 .ibox-form { width: 100%; max-width: 340px; display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
 .ibox-header { display: flex; align-items: center; gap: 10px; }
@@ -100,7 +88,6 @@ body { margin: 0;  }
 }
 .ibox-input::placeholder { color: rgba(255,255,255,0.7); }
 
-/* Voice icon */
 .voice-icon-wrapper {
   width: 80px; height: 80px; border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
@@ -110,12 +97,10 @@ body { margin: 0;  }
 .voice-icon-wrapper:hover { background: rgba(255, 255, 255, 0.3); transform: scale(1.1); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
 .voice-icon-wrapper svg { margin-bottom: 0; }
 
-/* Card header (generic) */
 .card__header { display: flex; flex-direction: column; width: 100%; justify-content: center; align-items: center; }
 .card-title { margin: 0; color: var(--ink); font-size: 16px; font-weight: 700; line-height: 1.2; }
 .card-sub { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
 
-/* Buttons */
 .btn-ghost {
   display: inline-flex; align-items: center; justify-content: center;
   height: 36px; padding: 0 16px; border: 0; border-radius: 10px;
@@ -123,17 +108,14 @@ body { margin: 0;  }
   font-size: 14px; font-weight: 500; cursor: pointer; transition: background-color 0.2s ease;
 }
 
-/* Footer */
-.footer {  border-top: 1px solid var(--border);  background: rgba(255,255,255,0.8); backdrop-filter: saturate(130%) blur(10px); }
-.footer__inner { text-align: center;  display: flex; flex-direction: column; gap: 16px; }
+.footer { border-top: 1px solid var(--border); background: rgba(255,255,255,0.8); backdrop-filter: saturate(130%) blur(10px); }
+.footer__inner { text-align: center; display: flex; flex-direction: column; gap: 16px; }
 .footer__nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; color: var(--muted); }
 .footer__copy { margin: 0; color: var(--muted); font-size: 14px; }
 
-/* Links */
 .link { color: var(--muted); font-size: 16px; line-height: 1.5; text-decoration: none; }
 .link:hover { text-decoration: underline; }
 
-/* Floating Action Button - Home */
 .fab-home {
   position: fixed; right: 24px; bottom: 24px; width: 56px; height: 56px; border-radius: 50%;
   background: var(--accent); color: #fff; display: inline-flex; align-items: center; justify-content: center;
@@ -146,10 +128,9 @@ body { margin: 0;  }
 .fab-home:focus { outline: 2px solid transparent; }
 .fab-home:focus-visible { outline: 3px solid rgba(0,0,0,0.3); outline-offset: 2px; }
 
-/* ===== CTA ===== */
 .cta {
-   padding: 40px 0; display: flex; align-items: center; justify-content: center; 
- }
+  padding: 40px 0; display: flex; align-items: center; justify-content: center; 
+}
 
 .cta .container { display: flex; justify-content: center; align-items: center; flex-direction: column; }
 
@@ -163,7 +144,6 @@ body { margin: 0;  }
 .cta-button:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
 .cta-button:disabled { opacity: .6; cursor: not-allowed; }
 
-/* ===== Loading Overlay ===== */
 .loading-overlay {
   position: fixed; inset: 0; background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(6px) saturate(120%);
@@ -179,10 +159,9 @@ body { margin: 0;  }
 @keyframes spin { to { transform: rotate(360deg); } }
 .loading-text { font-size: 14px; color: var(--ink); }
 
-/* ===== Toast ===== */
 .toast {
   position: fixed; right: 16px; top: 16px; width: fit-content;
-  transform: translateX(-50%);   left: 50%;   
+  transform: translateX(-50%); left: 50%; 
   display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center;
   padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border);
   box-shadow: 0 10px 22px rgba(0,0,0,0.08); background: #fff; z-index: 1000;
@@ -190,31 +169,29 @@ body { margin: 0;  }
 }
 @keyframes toast-in { from {opacity:0; transform: translateY(-8px);} to {opacity:1; transform: translateY(0);} }
 .toast--success { border-color: #ffd4ad; background: #fff7f0; }
-.toast--error   { border-color: #ffb8b8; background: #fff4f4; }
+.toast--error { border-color: #ffb8b8; background: #fff4f4; }
 .toast__icon { font-size: 18px; line-height: 1; }
 .toast__msg { font-size: 14px; color: var(--ink); }
 .toast__close { appearance:none; border:0; background:transparent; font-size:18px; line-height:1; cursor:pointer; color:#6e6e6e; }
 .toast__close:hover { color:#000; }
 
-/* ===== Result Modal ===== */
 .modal-backdrop{
   position: fixed; inset: 0;
   background: rgba(0,0,0,0.45);
-  display: flex; align-items: center; justify-content: center; /* 중앙 정렬 */
+  display: flex; align-items: center; justify-content: center;
   z-index: 1000;
 }
 
-/* ===== Result Card ===== */
 .rv-card {
   position: relative;
   width: min(760px, 94vw);
-  max-height: 88vh;                 /* 뷰포트 내 수납 */
+  max-height: 88vh;
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 14px;
   box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-  overflow-y: auto;                 /* 세로 스크롤만 */
-  overflow-x: hidden;               /* 좌우 스크롤 제거 */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .rv-actions {
   position: absolute;
@@ -223,7 +200,6 @@ body { margin: 0;  }
   display: inline-flex;
   gap: 12px;
 }
-/* 좌측 정렬용 오버라이드 */
 .rv-actions--left {
   right: 16px;
   left: auto;
@@ -241,10 +217,7 @@ body { margin: 0;  }
 }
 .rv-textarea--compact { resize: none; }
 
-/* Result buttons */
 .rv-btn { height: 36px; padding: 0 12px; border-radius: 10px; border: 0; font-size: 14px; font-weight: 800; cursor: pointer; transition: background-color .15s ease, box-shadow .15s ease, transform .05s ease; }
 .rv-btn:active { transform: translateY(0.5px); }
 .rv-btn-ghost { background: #fff1e6; color: var(--ink); border: 1px solid transparent; }
 .rv-btn-ghost:hover { background: #ffe6d4; }
-
-
