@@ -205,8 +205,7 @@ export default function Mypage() {
                     const { generatedTitle, generatedDescription, createdAt } = item;
                     const date = new Date(createdAt).toLocaleDateString();
                     return (
-                      <tr key={item.historyId || i}> {/* key는 고유 ID를 사용하는 것이 더 좋습니다 */}
-                        {/* CellBtn을 사용하여 제목과 본문 표시 */}
+                      <tr key={item.historyId || i}>
                         <td><CellBtn text={generatedTitle} label="Title" /></td>
                         <td><CellBtn text={generatedDescription} label="Description" /></td>
                         <td className="td-right">

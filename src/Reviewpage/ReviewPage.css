@@ -5,11 +5,10 @@
 }
 
 .how-to-section {
-  background-color: #fff0e3; 
+  background-color: #fcf8ef; 
   padding: 3rem 0;
 }
 
-/* 👇 input-section을 flex column으로 설정 */
 .input-section {
   display: flex;
   flex-direction: column;

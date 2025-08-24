@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { MainActions } from "../src/Mainpage/MainActions";
-import { Main } from "../src/Mainpage/Main";
+import  {Main} from "../src/Mainpage/Main";
 import  ReviewPage  from "../src/Reviewpage/ReviewPage";
 import  Mypage from "../src/Mypage/Mypage";
 import Product from "../src/Product/Product";

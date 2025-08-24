@@ -173,7 +173,7 @@ export default function ReviewPage() {
           </div>
         </div>
 
-        <div className="flex justify-center p-5 how-to-section">
+        <div className="flex justify-center p-5 how-to-section from-orange-800 to-red-700" >
           <div className="max-w-[960px] flex-1">
             <h2 className="how-to-title">
               이렇게 사용해 보세요!
