@@ -8,18 +8,18 @@ import Header from "../Header/Header";
 export default function Naver(){
 
       const images = [
-    "/start.png", 
-    "/new2.jpg",
-    "/3.png",
-    "/new4.jpg",
-    "/new5.jpg",
-    "/new6.jpg",
-    "/7.png",
-    "/new8.png",
-    "/9.png",
-    "/10.png",
-    "/11.png",
-    "/12.png"
+    "/naver1.png", 
+    "/naver2.jpg",
+    "/naver3.png",
+    "/naver4.jpg",
+    "/naver5.png",
+    "/naver6.jpg",
+    "/naver7.png",
+    "/naver8.png",
+    "/naver9.png",
+    "/naver10.jpg",
+    "/naver11.png",
+    "/naver12.png"
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -75,6 +75,13 @@ export default function Naver(){
           </button>
         </div>
       </div>
+       <footer className="flex justify-center">
+              <div className="flex max-w-[960px] flex-1 flex-col">
+                <div className="flex flex-col gap-6 px-5 py-10 text-center @container">
+                  <p className="text-[#8a7260] text-base font-normal leading-normal">© 2025 Orumi. All rights reserved.</p>
+                </div>
+              </div>
+            </footer>
     </div>
   );
 
