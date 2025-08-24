@@ -2,11 +2,10 @@
   display: flex;
   justify-content: center;
   gap: 1rem;
-  padding: 0 1rem;
 }
 
 .how-to-section {
-  background-color: #fff9f0; 
+  background-color: #fff0e3; 
   padding: 3rem 0;
 }
 
@@ -35,7 +34,7 @@
   flex: 1;
   resize: none;
   border-radius: 0.5rem;
-  border: 1px solid #dbe0e6;
+  border: 1px solid #f2d0b4;
   background-color: white;
   min-height: 9rem;
   padding: 15px;
@@ -44,10 +43,10 @@
   color: #111418;
 }
 
-/* 👇 새로운 컨트롤 그룹 스타일 */
+
 .controls-group {
   display: flex;
-  justify-content: center; /* 가로 중앙 정렬 */
+  justify-content: center;
   align-items: center;
   gap: 1rem;
   padding-top: 1rem;
@@ -84,7 +83,7 @@
 }
 
 .btn-generate {
-  background-color: #c46f2d;
+  background-color: #ff6f00;
   color: white;
 }
 
@@ -106,7 +105,7 @@
   font-size: 2rem;
   font-weight: 800;
   text-align: center;
-  color: #923522;
+  color: #111418;
   margin-bottom: 2rem;
 }
 
@@ -132,7 +131,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f7e6d4;
+  background-color: #fffaf6;
   border-radius: 50%;
   margin-bottom: 1rem;
 }
@@ -140,17 +139,36 @@
 .how-to-icon svg {
   width: 32px;
   height: 32px;
-  color: #923522;
+  color: #d84800;
 }
 
 .how-to-step-title {
   font-size: 1.25rem;
   font-weight: bold;
-  color: #111418;
+  color: #d84800;
 }
 
 .how-to-step-description {
   font-size: 1rem;
   color: #8a7260;
   line-height: 1.5;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+.btn-generate > .flex {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }

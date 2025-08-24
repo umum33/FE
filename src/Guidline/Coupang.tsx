@@ -8,18 +8,18 @@ import Header from "../Header/Header";
 export default function Couapng(){
 
       const images = [
-    "/qu1.png", 
-    "/qu2.jpg",
-    "/qu3.png",
-    "/qu4.png",
-    "/qu5.jpg",
-    "/qu6.png",
-    "/qu7.png",
-    "/qu8.png",
-    "/qu9.png",
-    "/qu10.png",
-    "/qu11.png",
-    "/qu12.png"
+    "/qupang1.png", 
+    "/qupang2.jpg",
+    "/qupang3.png",
+    "/qupang4.png",
+    "/qupang5.jpg",
+    "/qupang6.png",
+    "/qupang7.png",
+    "/qupang8.png",
+    "/qupang9.png",
+    "/qupang10.jpg",
+    "/qupang11.jpg",
+    "/qupang12.png"
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -34,9 +34,6 @@ export default function Couapng(){
     );
   };
 
-//   const handleDotClick = (index) => {
-//     setCurrentImageIndex(index);
-//   };
 
   return (
     <div
@@ -77,18 +74,15 @@ export default function Couapng(){
             <ChevronRight />
           </button>
         </div>
-
-        {/* 👇 슬라이드 점(dots) 내비게이션 추가 */}
-        {/* <div className="slider-dots-container">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              className={`slider-dot ${index === currentImageIndex ? 'active' : ''}`}
-              onClick={() => handleDotClick(index)}
-            ></button>
-          ))}
-        </div> */}
-      </div>
+    </div>
+    
+       <footer className="flex justify-center">
+              <div className="flex max-w-[960px] flex-1 flex-col">
+                <div className="flex flex-col gap-6 px-5 py-10 text-center @container">
+                  <p className="text-[#8a7260] text-base font-normal leading-normal">© 2025 Orumi. All rights reserved.</p>
+                </div>
+              </div>
+            </footer>
     </div>
   );
 

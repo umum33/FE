@@ -25,6 +25,23 @@ const CopyIcon = () => (
   </svg>
 );
 
+const SpinnerIcon = () => (
+  <svg
+    className="spinner"
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+  </svg>
+);
+
 const toneMapping = {
   "친절한 어조": "POLITE",
   "전문적인 어조": "NEUTRAL",
@@ -54,8 +71,11 @@ export default function ReviewPage() {
   };
 
   const handleGenerate = async () => {
+
+    setIsLoading(true);
+
     try {
-      const apiEndpoint = '/api/v1/reviews/generate'; 
+      const apiEndpoint = '/api/v1/reviews/generate';
 
       const reviewStyle = toneMapping[selectedTone as keyof typeof toneMapping];
 
@@ -102,16 +122,15 @@ export default function ReviewPage() {
               <div className="input-section">
                 <label className="form-label">
                   <p className="label-text">고객 리뷰</p>
-                  <textarea 
+                  <textarea
                   className="textarea"
                   value={reviewText}
                   onChange = {(e) => setReviewText(e.target.value)}>
                   </textarea>
                 </label>
-                <div className="controls-group">
+                <div className="controls-group flex justify-between items-end">
                   <div className="select-container">
                     <label className="form-label">
-                      <p className="label-text">응답 어조 선택</p>
                       <select className="select"
                       value={selectedTone}
                       onChange={(e)=> setSelectedTone(e.target.value)}>
@@ -122,13 +141,19 @@ export default function ReviewPage() {
                     </label>
                   </div>
                   <button className="btn-generate" onClick={handleGenerate} disabled={isLoading}>
-                    <span className="truncate">{isLoading ? "로딩 중..." : "생성버튼"}</span>
+                    {isLoading ? (
+                      <span className="flex items-center gap-2">
+                        <SpinnerIcon />
+                        <span>로딩 중...</span>
+                      </span>
+                    ) : (
+                      <span className="truncate">생성버튼</span>
+                    )}
                   </button>
                 </div>
               </div>
 
-              {/* AI-Generated Response */}
-              <div className="input-section">
+              <div className="input-section flex-1">
                 <label className="form-label">
                   <p className="label-text">생성된 응답</p>
                   <textarea
@@ -178,6 +203,13 @@ export default function ReviewPage() {
             </div>
           </div>
         </div>
+         <footer className="flex justify-center">
+             <div className="flex max-w-[960px] flex-1 flex-col">
+               <div className="flex flex-col gap-6 px-5 py-10 text-center @container">
+                 <p className="text-[#8a7260] text-base font-normal leading-normal">© 2025 Orumi. All rights reserved.</p>
+               </div>
+             </div>
+           </footer>
       </div>
     </div>
   );

@@ -51,7 +51,6 @@ export default function Guidline() {
                 온라인 스토어의 회원가입 및 기본 설정 완료 후 참고하실 것을 권고드립니다
               </p>
             </div>
-            {/* 좌우로 나열된 버튼 컨테이너 */}
             <div className="flex flex-col md:flex-row justify-center items-center gap-6 p-4">
               {registrationStores.map((store, index) => (
                 <div
@@ -79,6 +78,13 @@ export default function Guidline() {
           </div>
         </div>
       </div>
+       <footer className="flex justify-center">
+              <div className="flex max-w-[960px] flex-1 flex-col">
+                <div className="flex flex-col gap-6 px-5 py-10 text-center @container">
+                  <p className="text-[#8a7260] text-base font-normal leading-normal">© 2025 Orumi. All rights reserved.</p>
+                </div>
+              </div>
+            </footer>
     </div>
   );
 }
