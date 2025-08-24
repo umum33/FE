@@ -3,8 +3,7 @@ import "./Mypage.css";
 import Homeback from "../Homeback/Homeback";
 import Header from "../Header/Header";
 
-/* ---------------- Modal (그대로 사용) ---------------- */
-function Modal({ open, onClose, title = "Full content", actions, children }) { // actions prop 추가
+function Modal({ open, onClose, title = "Full content", actions, children }) {
   React.useEffect(() => {
     function onKey(e) { if (e.key === "Escape") onClose(); }
     if (open) document.addEventListener("keydown", onKey);
@@ -18,7 +17,7 @@ function Modal({ open, onClose, title = "Full content", actions, children }) { /
         <div className="modal-header">
           <h3 className="modal-title">{title}</h3>
           <div className="modal-actions">
-            {actions} {/* 여기에 주황색 버튼이 들어옵니다 */}
+            {actions}
             <button className="modal-close" onClick={onClose} aria-label="Close dialog">✕</button>
           </div>
         </div>
@@ -36,23 +35,13 @@ export default function Mypage() {
     year: "numeric", month: "long", day: "2-digit",
   });
 
-  // ✅ 행 단위 선택 상태
   const [selectedRow, setSelectedRow] = React.useState(null);
-
-  // ✅ 상품글 행 선택 상태
   const [selectedPost, setSelectedPost] = React.useState(null);
-
-  // 서버에서 받아올 데이터를 위한 state
   const [reviewHistory, setReviewHistory] = React.useState([]);
   const [productHistory, setProductHistory] = React.useState([]);
-
-
-
-  // 로딩 및 에러 상태를 위한 state
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
 
-  // 페이지 처음 열릴 때 서버에 데이터 요청
   React.useEffect(() => {
     const fetchHistory = async () => {
       try {
@@ -69,15 +58,9 @@ export default function Mypage() {
         setLoading(false);
       }
     };
-
     fetchHistory();
   }, []);
 
-
-
-
-
-  //복사 함수
   const handleCopy = async (textToCopy) => {
     try {
       await navigator.clipboard.writeText(textToCopy);
@@ -86,17 +69,15 @@ export default function Mypage() {
       alert("복사에 실패했습니다.");
     }
   };
-  // ✅ 셀 클릭 시 같은 핸들러로 행 모달 오픈
+
   const openRow = (review, reply, date) => {
     setSelectedRow({ review, reply, date });
   };
 
   return (
     <div className="page-root" style={{ fontFamily: '"Work Sans", "Noto Sans", sans-serif' }}>
-      {/* Header */}
       <Header />
       <Homeback />
-      {/* 스크롤 영역 */}
       <div className="content-scroll">
         <div className="container">
           <div className="greeting">
@@ -115,9 +96,9 @@ export default function Mypage() {
             <div className="card-scroll">
               <table className="table-fixed">
                 <colgroup>
-                  <col style={{ width: "35%" }}/>{/* Review */}
-                  <col style={{ width: "45%" }}/>{/* Reply */}
-                  <col style={{ width: "12%" }} />{/* Date */}
+                  <col style={{ width: "35%" }} />
+                  <col style={{ width: "45%" }} />
+                  <col style={{ width: "12%" }} />
                 </colgroup>
                 <thead>
                   <tr>
@@ -126,25 +107,20 @@ export default function Mypage() {
                     <th className="th-right">생성 날짜</th>
                   </tr>
                 </thead>
-
                 <tbody>
                   {reviewHistory.map((item, i) => {
-                    // ✅ 셀 공통 렌더러 (미리보기 + 클릭→모달)
                     const CellBtn = ({ text, label }) => (
                       <button
                         type="button"
                         className="ellipsis-trigger cell-trigger"
-                        onClick={() => setSelectedRow(item)} // 전체 item 객체를 state에 저장
+                        onClick={() => setSelectedRow(item)}
                         title="눌러서 전체 내용 확인"
                       >
                         {text}
                       </button>
                     );
-
-                    // API 응답 데이터에 맞게 변수 이름 변경
                     const { reviewText, generatedReply, createdAt } = item;
                     const date = new Date(createdAt).toLocaleDateString();
-
                     return (
                       <tr key={i}>
                         <td><CellBtn text={reviewText} label="Review" /></td>
@@ -167,7 +143,6 @@ export default function Mypage() {
             </div>
           </div>
 
-          {/* 섹션 2: 생성된 상품글 (카드 자체 스크롤 + 날짜 고정폭) */}
           <h2 className="section-title with-icon">
             <span className="section-icon" aria-hidden="true">🛍️</span>
             내가 생성한 상품글 내역
@@ -177,8 +152,8 @@ export default function Mypage() {
             <div className="card-scroll">
               <table className="table-fixed">
                 <colgroup>
-                  <col style={{ width: "35%" }}/>{/* Title */}
-                  <col style={{ width: "45%" }}/>{/* content */}
+                  <col style={{ width: "35%" }} />
+                  <col style={{ width: "45%" }} />
                   <col style={{ width: "12%" }} />
                 </colgroup>
                 <thead>
@@ -190,7 +165,6 @@ export default function Mypage() {
                 </thead>
                 <tbody>
                   {productHistory.map((item, i) => {
-                    // ✅ 셀 공통 렌더러 (리뷰 섹션과 동일한 구조)
                     const CellBtn = ({ text, label }) => (
                       <button
                         type="button"
@@ -201,12 +175,10 @@ export default function Mypage() {
                         {text}
                       </button>
                     );
-
                     const { generatedTitle, generatedDescription, createdAt } = item;
                     const date = new Date(createdAt).toLocaleDateString();
                     return (
-                      <tr key={item.historyId || i}> {/* key는 고유 ID를 사용하는 것이 더 좋습니다 */}
-                        {/* CellBtn을 사용하여 제목과 본문 표시 */}
+                      <tr key={item.historyId || i}>
                         <td><CellBtn text={generatedTitle} label="Title" /></td>
                         <td><CellBtn text={generatedDescription} label="Description" /></td>
                         <td className="td-right">
@@ -227,10 +199,6 @@ export default function Mypage() {
             </div>
           </div>
 
-
-
-
-          {/* ✅ 행 단위 모달: 리뷰 + 응답 + 날짜 같이 표기 */}
           <Modal
             open={!!selectedRow}
             onClose={() => setSelectedRow(null)}
@@ -254,18 +222,15 @@ export default function Mypage() {
                 <div className="post-meta">
                   작성일: <strong>{new Date(selectedRow.createdAt).toLocaleDateString()}</strong>
                 </div>
-
               </div>
             )}
           </Modal>
-
 
           <Modal
             open={!!selectedPost}
             onClose={() => setSelectedPost(null)}
             title="📜 상품글 상세"
             actions={
-              // 제목과 본문을 함께 복사하도록 수정
               <button className="modal-copy-button" onClick={() => handleCopy(`${selectedPost?.generatedTitle}\n\n${selectedPost?.generatedDescription}`)}>
                 전체 복사
               </button>
@@ -277,19 +242,16 @@ export default function Mypage() {
                   <h4 className="post-label">상품글 제목</h4>
                   <div className="post-text">{selectedPost.generatedTitle}</div>
                 </div>
-                {/* ▼▼▼ 본문 섹션 추가 ▼▼▼ */}
                 <div className="modal-content-section">
                   <h4 className="post-label">본문</h4>
                   <div className="post-text">{selectedPost.generatedDescription}</div>
                 </div>
-                {/* ▲▲▲ 본문 섹션 추가 ▲▲▲ */}
                 <div className="post-meta">
                   작성일: <strong>{new Date(selectedPost.createdAt).toLocaleDateString()}</strong>
                 </div>
               </div>
             )}
           </Modal>
-
         </div>
         <footer className="footer">
           <p>© {new Date().getFullYear()} Orumi. All rights reserved.</p>
