@@ -62,11 +62,18 @@ export default function Mypage() {
   }, []);
 
   const handleCopy = async (textToCopy) => {
+    const text = textToCopy || '';
     try {
       await navigator.clipboard.writeText(textToCopy);
       alert("복사되었습니다!");
-    } catch{
-      alert("복사에 실패했습니다.");
+    } catch(err) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      alert("복사되었습니다!");
     }
   };
 
