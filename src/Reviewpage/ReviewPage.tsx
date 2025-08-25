@@ -27,7 +27,7 @@ const CopyIcon = () => (
 
 const SpinnerIcon = () => (
   <svg
-    className="spinner"
+    className="animate-spin text-gray-500"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
@@ -54,20 +54,28 @@ export default function ReviewPage() {
   const [generatedResponse, setGeneratedResponse] = useState("");
   const [selectedTone, setSelectedTone] = useState("친절한 어조");
   const [isLoading, setIsLoading] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
-  const handleCopy = () => {
-    if (generatedResponse) {
-      navigator.clipboard.writeText(generatedResponse)
-        .then(() => {
-          alert("응답이 복사되었습니다!");
-        })
-        .catch(err => {
-          console.error("복사 실패:", err);
-          alert("복사 실패. 다시 시도해 주세요.");
-        });
-    } else {
-      alert("생성된 응답이 없습니다.");
+
+  const handleCopy = async () => {
+    const textToCopy = generatedResponse;
+    if (!textToCopy) return;
+
+    try {
+    
+      await navigator.clipboard.writeText(textToCopy);
+    } catch (err) {
+      const tempTextArea = document.createElement("textarea");
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempTextArea);
     }
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 1500);
   };
 
   const handleGenerate = async () => {
