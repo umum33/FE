@@ -44,7 +44,7 @@ const SpinnerIcon = () => (
 
 const toneMapping = {
   "친절한 어조": "POLITE",
-  "전문적인 어조": "NEUTRAL",
+  "전문적인 어조": "",
   "유쾌한 어조": "FUNNY",
 };
 
@@ -96,7 +96,6 @@ export default function ReviewPage() {
       console.error("API 통신 중 오류가 발생했습니다:", error);
       alert("서버 연결에 실패했습니다. CORS 설정 또는 URL을 확인해주세요.");
     }finally {
-      // 요청이 성공하거나 실패하든, 로딩이 끝나면 isLoading을 false로 설정
       setIsLoading(false);
     }
   };
@@ -105,6 +104,13 @@ export default function ReviewPage() {
     <div
       className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
       style={{ fontFamily: '"Work Sans", "Noto Sans", sans-serif' }}>
+        {isLoading && ( <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+            <div className="flex items-center gap-2 p-4 bg-white rounded-lg shadow-lg">
+              <SpinnerIcon />
+              <span>로딩 중...</span>
+              </div>
+              </div>
+            )}
       <div className="layout-container flex h-full grow flex-col">
         <Header />
         <Homeback />
@@ -141,14 +147,7 @@ export default function ReviewPage() {
                     </label>
                   </div>
                   <button className="btn-generate" onClick={handleGenerate} disabled={isLoading}>
-                    {isLoading ? (
-                      <span className="flex items-center gap-2">
-                        <SpinnerIcon />
-                        <span>로딩 중...</span>
-                      </span>
-                    ) : (
-                      <span className="truncate">생성버튼</span>
-                    )}
+                     <span className="truncate">생성버튼</span>
                   </button>
                 </div>
               </div>
