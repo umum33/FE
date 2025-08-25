@@ -9,10 +9,9 @@ export function Main() {
       className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
       style={{ fontFamily: '"Work Sans", "Noto Sans", sans-serif' }}
     >
-      <div className="layout-container flex h-full grow flex-col">
+      <div className="layout-container flex h-full grow flex-col gap-10">
         <Header />
-
-        <div className="px-4 sm:px-6 flex flex-1 justify-center py-5">
+        <div className="px-4 sm:px-6 flex flex-1 justify-center">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div className="@container">
               <div className="@[480px]:p-4">
@@ -50,15 +49,15 @@ export function Main() {
             </div>
           </div>
         </div>
-      </div>
-      <MainActions />
-      <footer className="flex justify-center">
-        <div className="flex max-w-[960px] flex-1 flex-col">
-          <div className="flex flex-col gap-6 px-5 py-10 text-center @container">
-            <p className="text-[#8a7260] text-base font-normal leading-normal">© 2025 Orumi. All rights reserved.</p>
+        <MainActions />
+        <footer className="flex justify-center">
+          <div className="flex max-w-[960px] flex-1 flex-col">
+            <div className="flex flex-col gap-6 px-5 py-10 text-center @container">
+              <p className="text-[#8a7260] text-base font-normal leading-normal">© 2025 Orumi. All rights reserved.</p>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 }
