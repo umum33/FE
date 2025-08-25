@@ -44,7 +44,7 @@ const SpinnerIcon = () => (
 
 const toneMapping = {
   "친절한 어조": "POLITE",
-  "전문적인 어조": "NEUTRAL",
+  "전문적인 어조": "",
   "유쾌한 어조": "FUNNY",
 };
 
