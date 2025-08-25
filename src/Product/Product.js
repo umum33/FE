@@ -36,7 +36,7 @@ function ResultCard({
           onClick={handleCopy}
           title="Copy title & description"
         >
-          📋 Copy
+          전체 복사
         </button>
         <button
           type="button"
