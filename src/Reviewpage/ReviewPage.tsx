@@ -44,7 +44,7 @@ const SpinnerIcon = () => (
 
 const toneMapping = {
   "친절한 어조": "POLITE",
-  "전문적인 어조": "",
+  "전문적인 어조": "PROFESSIONAL",
   "유쾌한 어조": "FUNNY",
 };
 
@@ -116,12 +116,10 @@ export default function ReviewPage() {
         <Homeback />
 
         <div className="px-40 flex flex-1 justify-center py-5">
-          <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <div className="flex flex-wrap justify-between gap-3 p-4">
-              <div className="flex min-w-72 flex-col gap-3">
+          <div className="layout-content-container flex-col justify-between max-w-[960px] flex-1 gap-3">
+            <div className="flex flex-col gap-3">
                 <h1 className="page-title">리뷰응답 생성하기</h1>
                 <p className="subtitle">오름이와 함께 쉽고 간편하게 리뷰를 생성할 수 있습니다</p>
-              </div>
             </div>
 
             <div className="horizontal-container">
@@ -134,7 +132,7 @@ export default function ReviewPage() {
                   onChange = {(e) => setReviewText(e.target.value)}>
                   </textarea>
                 </label>
-                <div className="controls-group flex justify-between items-end">
+                <div className="controls-group flex justify-between items-end ">
                   <div className="select-container">
                     <label className="form-label">
                       <select className="select"
