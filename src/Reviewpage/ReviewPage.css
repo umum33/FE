@@ -7,6 +7,7 @@
 .how-to-section {
   background-color: #fcf8ef; 
   padding: 3rem 0;
+  gap:2rem;
 }
 
 .input-section {
@@ -19,7 +20,7 @@
 .form-label {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 2;
 }
 
 .label-text {
@@ -35,7 +36,7 @@
   border-radius: 0.5rem;
   border: 1px solid #f2d0b4;
   background-color: white;
-  min-height: 9rem;
+  min-height: 15rem;
   padding: 15px;
   font-size: 1rem;
   line-height: normal;
@@ -47,8 +48,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
   padding-top: 1rem;
+  gap : 1rem;
 }
 
 .select-container {
@@ -57,7 +58,7 @@
   flex: none;
   align-items: flex-start;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.7rem;
 }
 
 .select {
@@ -95,7 +96,7 @@
 .page-title {
   color: #111418;
   letter-spacing: -0.025em;
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 900;
   line-height: 1.2;
 }
@@ -171,3 +172,4 @@
   align-items: center;
   gap: 8px;
 }
+
