@@ -4,6 +4,7 @@ export default function Header(){
 
     return(
         <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f5f2f0] px-10 py-3">
+            <a href="/" cursor-pointer>
               <div className="flex items-center gap-4 text-[#181411]">
                 <div className="size-4">
                   <svg
@@ -27,7 +28,8 @@ export default function Header(){
                   오름이
                 </h2>
               </div>
-            </header>
+            </a>
+          </header>
     );
     
 }
