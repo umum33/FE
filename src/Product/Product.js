@@ -16,6 +16,7 @@ function ResultCard({
     const text = `${title ? title + "\n\n" : ""}${description || ""}`;
     try {
       await navigator.clipboard.writeText(text);
+      alert("상품글이 복사되었습니다!");
     } catch {
       const ta = document.createElement("textarea");
       ta.value = text;
@@ -23,7 +24,7 @@ function ResultCard({
       ta.select();
       document.execCommand("copy");
       document.body.removeChild(ta);
-      alert("Copied to clipboard!");
+      alert("상품글이 복사되었습니다!");
     }
   };
 

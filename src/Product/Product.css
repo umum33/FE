@@ -217,7 +217,7 @@ body { margin: 0; }
 }
 .rv-textarea--compact { resize: none; }
 
-.rv-btn { height: 36px; padding: 0 12px; border-radius: 10px; border: 0; font-size: 14px; font-weight: 800; cursor: pointer; transition: background-color .15s ease, box-shadow .15s ease, transform .05s ease; }
+.rv-btn { height: 36px; padding: 0 12px; border-radius: 10px; border: 0; font-size: 14px; font-weight: 800; cursor: pointer; transition: background-color .15s ease, box-shadow .15s ease, transform .05s ease; background-color: #e06c1d; }
 .rv-btn:active { transform: translateY(0.5px); }
 .rv-btn-ghost { background: #fff1e6; color: var(--ink); border: 1px solid transparent; }
-.rv-btn-ghost:hover { background: #ffe6d4; }
+.rv-btn-ghost:hover { background-color: #e06c1d }
